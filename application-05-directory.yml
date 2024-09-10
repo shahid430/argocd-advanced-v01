@@ -1,16 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: directory
+  name: application-dir-manifest
 spec:
+  destination:
+    namespace: directory
+    server: https://kubernetes.default.svc
   project: default
   source:
+          #    directory:
+          #      exclude: 'service.yml'
+          #      include: '{serviceaccount.yml,service.yml}'
+          #      recurse: true
     path: argocd-advanced-v01/directoryOfManifests
     repoURL: https://github.com/shahid430/argocd-advanced-v01.git
     targetRevision: master
-#    directory:
-#      include: '{deployment.yml,service.yml}'   ##### which files to include during deployment
-#      exclude: '{serviceAccount.yml}'           ##### which files to exclude during deployment          
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: directory
